@@ -8,8 +8,17 @@ class Config:
         self.public_key = None
         self.secret_key = None
         self.currency = None
+        self.side = None
         self.discordWebhookURL = None
         self.loadConfig()
+
+    def getSide(self):
+        return self.side
+
+    def setSide(self, side):
+        self.side = side
+        self.saveConfig()
+        return
 
     def getCurrency(self):
         return self.currency

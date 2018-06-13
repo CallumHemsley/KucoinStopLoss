@@ -1,5 +1,7 @@
+import _thread
 from src.lib.kucoin import KuCoin
 from src.lib.menu import Menu, ConfigMenu
+from src.lib.runtime import RuntimeOperations
 class StopLoss:
     def __init__(self):
         self.state = 'Standby'
@@ -33,14 +35,11 @@ class StopLoss:
 
             # lets start the runtime operations
             start = RuntimeOperations()
-            #data = DetermineThreashhold()
             _thread.start_new_thread(start.initiate, (self, Config, ExchangeClass))
             #_thread.start_new_thread(data.run, (Config, ExchangeClass))
         elif update == '4':
-            cancel = Cancel()
+            ExchangeClass.cancelOrders(Config)
             self.state = 'Standby'
-            # cancel all trades
-            cancel.orders(Config)
 
             return
 
