@@ -9,14 +9,43 @@ class Config:
         self.secret_key = None
         self.currency = None
         self.side = None
+        self.amount = None
+        self.entryPrice = None
+        self.stopLossPrice = None
         self.discordWebhookURL = None
         self.loadConfig()
+
+    def getStopLossPrice(self):
+        return self.stopLossPrice
+
+    def setStopLossPrice(self, price):
+        self.stopLossPrice = price
+        self.saveConfig()
+        return
+
+
+    def getEntryPrice(self):
+        return self.entryPrice
+
+    def setEntryPrice(self, price):
+        self.entryPrice = price
+        self.saveConfig()
+        return
+
 
     def getSide(self):
         return self.side
 
     def setSide(self, side):
         self.side = side
+        self.saveConfig()
+        return
+
+    def getAmount(self):
+        return self.amount
+
+    def setAmount(self, amount):
+        self.amount = amount
         self.saveConfig()
         return
 
