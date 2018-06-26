@@ -1,4 +1,4 @@
-from src.lib.discord import DiscordWebhook
+from src.lib.discord.discordwebhook import DiscordWebhook
 from enum import Enum
 
 
