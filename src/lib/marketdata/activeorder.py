@@ -24,6 +24,8 @@ class ActiveOrder:
     def setPrice(self, price):
         self.price = price
 
+    def getQuantity(self):
+        return self.quantity
 
     def setQuantity(self, quantity):
         self.quantity = quantity
