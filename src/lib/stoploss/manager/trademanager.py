@@ -23,6 +23,14 @@ class TradeManager:
                     print("Something got bought/sold!")
                     print(o['dealValue'])
                     amountBought = float(o['dealValue'])
+
+
+                    '''
+                    The issue we have her is that when we check dealt orders, this includes partial orders but doesn't indicate to use that it's a partial order.
+                    My solution i'm thinking right now is to subtract the amount sold/bought from currentOrder.getAmount() until it's  0.
+                    '''
+
+
                     # let's update active order to this amount so we dont try to buy back in with too little!
                     CurrentOrder.setQuantity(amountBought)
 
