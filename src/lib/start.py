@@ -37,7 +37,8 @@ class StopLoss:
 
             # lets start the runtime operations
             start = RuntimeOperations()
-            _thread.start_new_thread(start.initiate, (self, Config, ExchangeClass))
+            start.initiate(Config, ExchangeClass)
+            return
             #_thread.start_new_thread(data.run, (Config, ExchangeClass))
         elif update == '4':
             ExchangeClass.cancelOrders(Config)

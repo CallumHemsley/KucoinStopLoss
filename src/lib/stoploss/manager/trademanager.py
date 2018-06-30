@@ -32,7 +32,7 @@ class TradeManager:
 
 
                     # let's update active order to this amount so we dont try to buy back in with too little!
-                    CurrentOrder.setQuantity(amountBought)
+                    #CurrentOrder.setQuantity(amountBought)
 
                     '''amountBought = float(CurrentOrder.getAmount()) - amountBought
                     point1Perecent = amountBought / 1000
@@ -45,8 +45,8 @@ class TradeManager:
                     CurrentOrder.add(quantity=quantity, soldPrice=CurrentOrder.getSoldPrice(), amount=amountBought)'''
 
                     # lets alert discord
-                    self.discordAlert(Config, orderId, o['amount'],
-                                      o['dealPrice'], o['fee'], o['direction'], o['createdAt'])
+                    '''self.discordAlert(Config, orderId, o['amount'],
+                                      o['dealPrice'], o['fee'], o['direction'], o['createdAt'])'''
                     KuCoinObj.cancelBuyOrders(Config)
                     return True
             #if self.checkPartial(Config,buyQueue,sellQueue,KuCoinObj) is True:
@@ -64,11 +64,10 @@ class TradeManager:
 
         discordAlert = DiscordAlert(Config.getDiscordWebhookURL(),username=testusername)
 
-        discordAlert.sendAlert("Successful Trade Alert", DiscordAlert.DiscordAlertColor.INFORMATION,
+        discordAlert.sendAlert("Successful Trade Alert",
                                {
-                                   "Exchange": str(Config.getExchange()),
+                                   "Exchange": "KuCoin",
                                    "Currency Trading": str(Config.getCurrency()),
-                                   "Coin Allowance": str(Config.getCoinAllowance()),
                                    "Side":  str(side),
                                    "Quantity Traded": str(amountTraded),
                                    "Price traded at": str(priceAtTrade),

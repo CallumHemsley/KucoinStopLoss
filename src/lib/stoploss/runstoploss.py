@@ -41,19 +41,22 @@ class RunStopLoss:
         else:
             # then we want to buy.
             # calculate new quant from price.
-            total = currentOrder.getQuantity() * currentOrder.getPrice()
+            total = float(currentOrder.getQuantity()) * float(currentOrder.getPrice())
             point1Perecent = total / 1000
             total = total - point1Perecent
             total -= 0.000001
-            newQuant = total / Config.getStopLossPrice()
+            newQuant = total / float(Config.getStopLossPrice())
             order = Exchange.createOrder(Config.getCurrency(), 'buy', sellOrders[0].getPrice(), newQuant)
 
     def checkStopLoss(self, buyOrders, sellOrders, currentOrder, Config):
-        if currentOrder.getSide() is 'buy':
+        print("Checking stop loss..")
+        if currentOrder.getSide() == 'BUY':
             if buyOrders[0].getPrice() <= float(Config.getStopLossPrice()):
+                print("Stop loss hit")
                 return 'buy'
         else:
             if sellOrders[0].getPrice() >= float(Config.getStopLossPrice()):
+                print("Stop loss hit")
                 return 'sell'
         return 'none'
     def updateBuyOrders(self, Config, buyOrders, KuCoinObj):

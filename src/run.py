@@ -5,7 +5,7 @@ def run():
     Configuration = Config()
     bot = StopLoss()
 
-    bot.start()
+    bot.start(Configuration)
 
 run()
 
