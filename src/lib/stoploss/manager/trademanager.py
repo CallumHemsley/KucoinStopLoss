@@ -30,9 +30,9 @@ class TradeManager:
                     My solution i'm thinking right now is to subtract the amount sold/bought from currentOrder.getAmount() until it's  0.
                     '''
 
-
+                    #NEED TO UPDATE THIS SO TAKES ONLY AMOUNT ACTUALLY BOUGHT
                     # let's update active order to this amount so we dont try to buy back in with too little!
-                    #CurrentOrder.setQuantity(amountBought)
+                    CurrentOrder.setQuantity(amountBought)
 
                     '''amountBought = float(CurrentOrder.getAmount()) - amountBought
                     point1Perecent = amountBought / 1000
