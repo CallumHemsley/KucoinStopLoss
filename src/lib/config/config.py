@@ -11,15 +11,15 @@ class Config:
         self.side = None
         self.amount = None
         self.entryPrice = None
-        self.stopLossPrice = None
+        self.stopLossPercent = None
         self.discordWebhookURL = None
         self.loadConfig()
 
-    def getStopLossPrice(self):
-        return self.stopLossPrice
+    def getStopLossPercent(self):
+        return self.stopLossPercent
 
-    def setStopLossPrice(self, price):
-        self.stopLossPrice = price
+    def setStopLossPercent(self, price):
+        self.stopLossPercent = price
         self.saveConfig()
         return
 

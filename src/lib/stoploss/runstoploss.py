@@ -15,6 +15,9 @@ class RunStopLoss:
         while bought is False: # Loop until order bought.
             bought = Manager.validateQueues(Config, currentOrder, Exchange)
         # Now it's bought.
+        currentOrder.setHighestPrice(Config.getEntryPrice())
+
+
         # see if stop loss gets hit.
         # if it does, we buy back in.
         check = self.checkStopLoss(buyOrders, sellOrders, currentOrder, Config)
@@ -50,12 +53,20 @@ class RunStopLoss:
 
     def checkStopLoss(self, buyOrders, sellOrders, currentOrder, Config):
         print("Checking stop loss..")
+        trailDiff = float(currentOrder.getHighestPrice()) * float(Config.getStopLossPercent())
+        trailPrice = float(currentOrder.getHighestPrice()) - float(trailDiff)
         if currentOrder.getSide() == 'BUY':
-            if buyOrders[0].getPrice() <= float(Config.getStopLossPrice()):
+            if buyOrders[0].getPrice() > float(currentOrder.getHighestPrice()):
+                currentOrder.setHighestPrice(buyOrders[0].getPrice())
+                return 'none'
+            if buyOrders[0].getPrice() <= trailPrice:
                 print("Stop loss hit")
                 return 'buy'
         else:
-            if sellOrders[0].getPrice() >= float(Config.getStopLossPrice()):
+            if sellOrders[0].getPrice() < float(currentOrder.getHighestPrice()):
+                currentOrder.setHighestPrice(sellOrders[0].getPrice())
+                return 'none'
+            if sellOrders[0].getPrice() >= trailPrice:
                 print("Stop loss hit")
                 return 'sell'
         return 'none'

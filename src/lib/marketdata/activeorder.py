@@ -4,6 +4,7 @@ class ActiveOrder:
         self.orderId = None
         self.price = 0.00
         self.side = side
+        self.highestPrice = 0.00
         self.quantity = 0.00
 
     def getId(self):
@@ -23,6 +24,12 @@ class ActiveOrder:
 
     def setPrice(self, price):
         self.price = price
+
+    def getHighestPrice(self):
+        return self.highestPrice
+
+    def setHighestPrice(self, price):
+        self.highestPrice = price
 
     def getQuantity(self):
         return self.quantity
